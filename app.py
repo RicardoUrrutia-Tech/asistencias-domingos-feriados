@@ -34,8 +34,20 @@ if uploaded:
     df["EntradaFecha"] = pd.to_datetime(df["EntradaFecha"], errors="coerce")
     df["SalidaFecha"] = pd.to_datetime(df["SalidaFecha"], errors="coerce")
 
-    # Día de semana (en español)
-    df["DiaSemana"] = df["EntradaFecha"].dt.day_name(locale="es_ES")
+    # -------------------------------------------
+    # DÍA DE SEMANA EN ESPAÑOL (SIN locale)
+    # -------------------------------------------
+    dias_es = {
+        "Monday": "lunes",
+        "Tuesday": "martes",
+        "Wednesday": "miércoles",
+        "Thursday": "jueves",
+        "Friday": "viernes",
+        "Saturday": "sábado",
+        "Sunday": "domingo"
+    }
+
+    df["DiaSemana"] = df["EntradaFecha"].dt.day_name().map(dias_es)
 
     # -------------------------------------------
     # DOMINGOS
